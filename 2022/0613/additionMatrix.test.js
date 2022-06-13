@@ -1,7 +1,7 @@
-const nNumbers = (x,n)=>{
-    return Array.from({length : n}, (a, i) => (i+1)* x)
+const add = (arr1,arr2)=>{
+    return arr1.map((arr, i) => arr.map((x, j) => x + arr2[i][j]))
 }
 
-test(`x만큼 간격이 있는 n개의 숫자`, ()=>{
-    expect(nNumbers(2,5)).toEqual([2,4,6,8,10])
+test(`행렬의 덧셈`, ()=>{
+    expect(add([[1,2],[2,3]], [[3,4],[5,6]])).toEqual([[4,6],[7,9]])
 })
