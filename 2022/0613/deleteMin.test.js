@@ -1,5 +1,6 @@
 const deleteMin = (arr)=>{
-    return arr.length <=1? [-1] : arr.filter(v => v > Math.min(...arr)) 
+    const min = Math.min(...arr)
+    return arr.length <=1? [-1] : arr.filter(v => v > min) 
 }
 
 test(`제일 작은 수 제거`, ()=>{
