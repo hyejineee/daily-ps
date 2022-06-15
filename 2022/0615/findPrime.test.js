@@ -5,7 +5,6 @@ const solution = (n) => {
     primes[2] = true
 
     for (let i = 2; i <= n; i++) {
-        console.log(primes[i])
         if (primes[i] == false) continue
         for (let j = 2 * i; j <= n; j += i) primes[j] = false
     }
