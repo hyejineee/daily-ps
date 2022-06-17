@@ -1,9 +1,7 @@
 const solution = (s) => {
     if(!(s.length === 4 || s.length === 6)) return false
    
-    console.log(s.split(''))
     for(let i of s.split('')){
-        console.log(i)
         if(isNaN(parseInt(i))) return false
         if(parseInt(i) < 0) return false
     }
