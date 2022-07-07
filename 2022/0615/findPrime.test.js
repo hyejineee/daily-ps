@@ -12,6 +12,7 @@ const solution = (n) => {
     return primes.filter((v) => v).length
 }
 
+
 test(`소수찾기`, () => {
     expect(solution(10)).toEqual(4)
     expect(solution(5)).toEqual(3)
