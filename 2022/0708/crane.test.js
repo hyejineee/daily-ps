@@ -24,9 +24,10 @@ const solution = (board, moves) => {
     if (stack.length > 0 && stack[stack.length - 1] == pop) {
       stack.pop();
       count += 2;
-    } else {
-      stack.push(pop);
+      continue;
     }
+
+    stack.push(pop);
   }
 
   return count;
