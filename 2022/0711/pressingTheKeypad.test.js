@@ -8,11 +8,6 @@ const solution = (numbers, hand) => {
   const result = numbers.map((e) => {
     const pressed = e === 0 ? 11 : e;
     // 왼쪽 키패드에 있는 숫자를 누를 경우
-
-    // console.log(
-    //   `누른 위치 : ${pressed}, 현재 왼손 위치 : ${currentL},현재 오른손 위치 : ${currentR}`
-    // );
-
     if (lKeys.includes(pressed)) {
       currentL = pressed;
       return "L";
@@ -27,10 +22,6 @@ const solution = (numbers, hand) => {
     // 가운데에 있는 숫자를 누를 경우
     const lGap = getGap(currentL, pressed);
     const rGap = getGap(currentR, pressed);
-
-    // console.log(`누른 위치 : ${pressed}`);
-    // console.log(`현재 왼손 위치 : ${currentL}, gap : ${lGap} `);
-    // console.log(`현재 오른손 위치 : ${currentR}, gap : ${rGap} `);
 
     if (lGap < rGap) {
       // 왼손이 가까운 경우
