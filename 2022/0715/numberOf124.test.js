@@ -3,13 +3,12 @@ const solution = (n) => {
 };
 
 const get124 = (q, result) => {
-  if (q === 0) {
-    return result;
-  }
+  if (q === 0) return result;
 
-  const nq = Math.floor(q / 3);
-
-  return get124(q % 3 === 0 ? nq - 1 : nq, result + [4, 1, 2][q % 3]);
+  return get124(
+    q % 3 === 0 ? Math.floor(q / 3) - 1 : Math.floor(q / 3),
+    result + [4, 1, 2][q % 3]
+  );
 };
 
 test(`124 나라의 숫자`, () => {
