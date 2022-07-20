@@ -17,10 +17,12 @@ const solution = (orders, course) => {
       if (max < v) {
         max = v;
         keys.add(k);
+        continue
       }
 
       if (max === v) {
         keys.add(k);
+        continue
       }
     }
 
