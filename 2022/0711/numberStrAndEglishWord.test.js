@@ -15,7 +15,7 @@ const solution = (s) => {
   let result = s;
   Object.entries(numberWordMap).forEach(([k, v]) => {
     const reg = new RegExp(k, "g");
-    result = result.replace(reg, numberWordMap[k]);
+    result = result.replace(reg, v);
   });
 
   return Number(result);
