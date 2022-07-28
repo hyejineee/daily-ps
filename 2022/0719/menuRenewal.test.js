@@ -3,13 +3,12 @@ const solution = (orders, course) => {
 
   for (let c of course) {
     const count = {};
-    orders.forEach((e) => [
-      ...combination(e.split(""), 0, c, [], new Set(), new Set(), count),
-    ]);
 
+    orders.forEach((e) =>
+      combination(e.split("").sort(), 0, c, [], new Set(), count)
+    );
+    
     const countArr = Object.entries(count).sort((a, b) => b[1] - a[1]);
-
-    console.log(count);
 
     let max = 2;
     const keys = new Set();
@@ -17,26 +16,25 @@ const solution = (orders, course) => {
       if (max < v) {
         max = v;
         keys.add(k);
-        continue
+        continue;
       }
 
       if (max === v) {
         keys.add(k);
-        continue
+        continue;
       }
     }
 
     keys.forEach((e) => result.push(e));
   }
 
-  console.log(result.sort());
   return result.sort();
 };
 
 // 자바스크립트 조합
-const combination = (arr, index, level, temp, result, isUsed, count) => {
+const combination = (arr, index, level, temp, isUsed, count) => {
   if (temp.length === level) {
-    const set = [...temp].sort().join("");
+    const set = [...temp].join("");
     count[set] ? count[set]++ : (count[set] = 1);
     return;
   }
@@ -45,12 +43,10 @@ const combination = (arr, index, level, temp, result, isUsed, count) => {
     if (isUsed.has(arr[i])) continue;
     isUsed.add(arr[i]);
     temp.push(arr[i]);
-    combination(arr, i, level, temp, result, isUsed, count);
+    combination(arr, i, level, temp, isUsed, count);
     temp.pop();
     isUsed.delete(arr[i]);
   }
-
-  return result;
 };
 
 test(`메뉴 리뉴얼`, () => {
