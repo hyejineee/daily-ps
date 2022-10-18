@@ -10,10 +10,12 @@ const solution = (maps) => {
 
   const q = [];
   visited[0][0] = 1;
+
   q.push([0, 0]);
 
   while (q.length > 0) {
     if (visited[n - 1][m - 1] !== null) break;
+
     const [x, y] = q.shift();
 
     for (let i = 0; i < 4; i++) {
