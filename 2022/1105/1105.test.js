@@ -76,7 +76,8 @@ const solution3 = (worldmap) => {
     }
   }
 
-  return record[n - 1][m - 1] - 1;
+  console.log(record);
+  return record[m - 1][n - 1] - 1;
 };
 
 const isDanger = (dir, deg, map, current) => {
