@@ -5,22 +5,18 @@ const solution = (queue1, queue2) => {
 
   const half = Number(total / 2);
 
-  if (
-    queue1.filter((e) => e > half).length > 0 ||
-    queue2.filter((e) => e > half).length > 0
-  )
-    return -1;
+  if (queue1.some((e) => e > half) || queue2.some((e) => e > half)) return -1;
 
   let count = 0;
   let sum1 = sum(queue1);
   let sum2 = sum(queue2);
 
-  const merge = [...queue1, ...queue2];
+  const merge = [...queue1, ...queue2, ...queue1, queue2];
   let s1 = 0,
     s2 = queue1.length;
 
   while (sum1 !== half) {
-    if (s1 > queue1.length + 2 || s2 > merge.length + 2) return -1;
+    if (s2 > merge.length) return -1;
 
     if (sum1 > sum2) {
       const p1 = merge[s1];
