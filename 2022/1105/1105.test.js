@@ -101,7 +101,7 @@ const isDanger = (dir, deg, map, current) => {
   return false;
 };
 
-test(`두 큐 합 같게 만들기`, () => {
+test(`윈터코딩`, () => {
   expect(solution1("aabbbc")).toEqual("a*b*c");
   expect(
     solution2(

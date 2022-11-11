@@ -1,44 +1,54 @@
 const solution = (n, wires) => {
-  const tree = {};
-
+  const graph = {};
   wires.forEach(([n1, n2]) => {
-    tree[n1] ? tree[n1].push(n2) : (tree[n1] = [n2]);
-    tree[n2] ? tree[n2].push(n1) : (tree[n2] = [n1]);
+    graph[n1] ? graph[n1].push(n2) : (graph[n1] = [n2]);
+    graph[n2] ? graph[n2].push(n1) : (graph[n2] = [n1]);
   });
 
-  Object.entries(tree).forEach(([k, v]) => {});
-  console.log(tree);
-  const count = countChild(tree, 3, 4);
-  console.log(count);
+  let min = n;
+  for (let i = 1; i <= n; i++) {
+    const visited = Array.from({ length: n + 1 }, () => false);
+    const parent = Array.from({ length: n + 1 }, (_, i) => i);
+
+    findParent(graph, visited, parent, i);
+
+    for (let j = 1; j <= n; j++) {
+      if (i === j) continue;
+      const child = findChild(parent, j, i);
+      min = Math.min(min, Math.abs(child + 1 - (n - (child + 1))));
+    }
+  }
+
+  return min;
 };
 
-const countChild = (tree, parent, node) => {
+const findParent = (graph, visited, parent, node) => {
+  visited[node] = true;
+  for (let n of graph[node]) {
+    if (visited[n]) continue;
+    parent[n] = node;
+    findParent(graph, visited, parent, n);
+  }
+};
+
+const findChild = (tree, node, root) => {
+  const treeArr = Object.entries(tree);
+  if (node === root) return treeArr.length - 1;
+
   let count = 0;
 
-  const counter = (tree, parent, node) => {
-    console.log(
-      "parent",
-      parent,
-      "node",
-      node,
-      "child",
-      tree[node],
-      "count : ",
-      count
-    );
+  const find = (n) => {
+    const child = treeArr.filter(([k, v]) => v === n);
 
-    if (tree[node].filter((e) => e !== parent).length <= 0) {
-      return;
-    }
+    if (child.length <= 0) return;
+    if (n === root) return;
 
-    for (let e of tree[node]) {
-      if (e === parent) continue;
+    child.forEach(([k, v]) => {
       count++;
-      counter(tree, node, e);
-    }
+      find(Number(k));
+    });
   };
-
-  counter(tree, parent, node);
+  find(node);
   return count;
 };
 
