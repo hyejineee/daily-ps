@@ -11,7 +11,7 @@ const solution = (queue1, queue2) => {
   let sum1 = sum(queue1);
   let sum2 = sum(queue2);
 
-  const merge = [...queue1, ...queue2, ...queue1, queue2];
+  const merge = [...queue1, ...queue2, ...queue1, ...queue2];
   let s1 = 0,
     s2 = queue1.length;
 

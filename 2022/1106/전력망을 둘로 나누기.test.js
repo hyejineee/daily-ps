@@ -1,5 +1,6 @@
 const solution = (n, wires) => {
   const graph = {};
+
   wires.forEach(([n1, n2]) => {
     graph[n1] ? graph[n1].push(n2) : (graph[n1] = [n2]);
     graph[n2] ? graph[n2].push(n1) : (graph[n2] = [n1]);
