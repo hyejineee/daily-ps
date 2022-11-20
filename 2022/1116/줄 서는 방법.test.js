@@ -1,5 +1,3 @@
-const { readSync } = require("graceful-fs");
-
 const solution = (n, k) => {
   const totalCases = Array(n)
     .fill(0)
@@ -12,8 +10,6 @@ const solution = (n, k) => {
     n,
     []
   );
-
-  console.log(result);
 
   return result;
 };
