@@ -1,40 +1,39 @@
 const solution = (n, k) => {
-  const totalCases = Array(n)
-    .fill(0)
-    .reduce((acc, cur, index) => (index + 1) * acc, 1);
+  const dp = Array(21).fill(0);
+  dp[1] = 1;
+  dp[2] = 2;
 
-  const result = where(
-    totalCases,
-    k,
-    Array.from({ length: n }, (_, i) => i + 1),
-    n,
-    []
-  );
-
-  return result;
-};
-
-const where = (totalCases, k, numbers, n, result) => {
-  const cases = parseInt(totalCases / n);
-  const q = parseInt(k / cases);
-  const r = k % cases;
-
-  if (k === 0 || k === 1) {
-    const remain = numbers
-      .filter((e) => !result.includes(e))
-      .sort((a, b) => (k === 0 ? b - a : a - b));
-    result.push(...remain);
-    return result;
+  for (let i = 3; i < 21; i++) {
+    dp[i] = dp[i - 1] * i;
   }
 
-  result.push(numbers[r === 0 ? q - 1 : q]);
-  console.log(`q : ${q}, r : ${r}, cases : ${cases}`);
-  console.log(result);
+  const arr = Array(n)
+    .fill(0)
+    .map((_, i) => i + 1);
 
-  return where(cases, r, numbers, n - 1, result);
+  const result = [];
+
+  let kth = k - 1;
+  while (arr.length) {
+    if (kth === 0) {
+      result.push(...arr);
+      break;
+    }
+
+    const index = Math.floor(kth / dp[arr.length - 1]);
+    kth = kth % dp[arr.length - 1];
+
+    result.push(arr[index]);
+    arr.splice(index, 1);
+  }
+
+  return result;
 };
 
 test(`줄 서는 방법`, () => {
   expect(solution(3, 5)).toEqual([3, 1, 2]);
   expect(solution(4, 22)).toEqual([4, 2, 3, 1]);
 });
+
+
+// 참고 : https://velog.io/@longroadhome/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4-LV.3-%EC%A4%84-%EC%84%9C%EB%8A%94-%EB%B0%A9%EB%B2%95-JS
