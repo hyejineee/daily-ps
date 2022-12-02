@@ -17,10 +17,6 @@ const solution = (topping) => {
     }
 
     m2.has(k) ? m2.set(k, m2.get(k) + 1) : m2.set(k, 1);
-
-    console.log("m1", m1);
-    console.log("m2", m2);
-
     if (m1.size === m2.size) count++;
   }
 
