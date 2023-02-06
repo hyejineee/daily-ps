@@ -145,3 +145,4 @@ test(`롤 케이크 자르기`, () => {
   expect(solution()).toEqual(2);
   expect(solution([1, 2, 3, 1, 4])).toEqual(0);
 });
+
