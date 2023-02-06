@@ -43,3 +43,26 @@ test(`택배상자`, () => {
   expect(solution([4, 3, 1, 2, 5])).toEqual(2);
   expect(solution([5, 4, 3, 2, 1])).toEqual(5);
 });
+
+
+// function solution(order) {
+//   let k = [],
+//     c = 1,
+//     count = 0;
+//   for (let i = 0; i < order.length; ++i) {
+//     let t = order[i];
+//     if (k.length && k[k.length - 1] == t) {
+//       k.pop();
+//       ++count;
+//       continue;
+//     }
+//     while (t != c) {
+//       k.push(c);
+//       ++c;
+//       if (c > order.length) return count;
+//     }
+//     ++c;
+//     ++count;
+//   }
+//   return count;
+// }
