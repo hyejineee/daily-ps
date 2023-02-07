@@ -62,7 +62,7 @@ test(`택배상자`, () => {
 //       if (c > order.length) return count;
 //     }
 //     ++c;
-//     ++count;
+//     ++c
 //   }
 //   return count;
 // }
