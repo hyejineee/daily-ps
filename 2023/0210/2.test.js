@@ -53,7 +53,7 @@ const bfs = (i, j, visited, v, n, m) => {
   return count;
 };
 
-test(`단비교육 문제 1`, () => {
+test(`문제2`, () => {
   expect(
     solution([
       [1, 1, 0, 1, 1],
