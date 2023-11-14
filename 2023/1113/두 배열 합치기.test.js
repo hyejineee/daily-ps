@@ -4,9 +4,7 @@ const solution = (arr1, arr2) => {
 
   const result = [];
 
-  while (true) {
-    if (p1 >= arr1.length || p2 >= arr2.length) break;
-
+  while (p1 < arr1.length && p2 < arr2.length) {
     const v1 = arr1[p1];
     const v2 = arr2[p2];
 
