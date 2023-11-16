@@ -1,7 +1,7 @@
 const solution = (candidates) => {
   return [...candidates].reduce(
     (acc, cur) => {
-      acc[0].hasOwnProperty(cur) ? (acc[0][cur] += 1) : (acc[0][cur] = 0);
+      acc[0][cur] ? (acc[0][cur] += 1) : (acc[0][cur] = 0);
 
       if (acc[1] < acc[0][cur]) {
         acc[1] = acc[0][cur];
