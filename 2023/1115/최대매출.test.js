@@ -4,14 +4,12 @@ const solution = (arr, k) => {
   let p2 = k - 1;
   let result = acc;
 
-  for (let i = 0; i < k; i++) {
-    acc += arr[i];
-  }
+  for (let i = 0; i < k; i++) acc += arr[i];
 
-  while (p2 < arr.length) {
-    acc = acc - arr[p1] + arr[p2++];
-    p1++;
+  result = acc;
 
+  for (let i = k; i < arr.length; i++) {
+    acc += arr[i] - arr[i - k];
     result = Math.max(result, acc);
   }
 
