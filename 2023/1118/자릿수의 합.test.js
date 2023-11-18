@@ -28,10 +28,12 @@ const getSum = (num) => {
   return sum;
 };
 
-test(`getSum`, () => {
-  expect(getSum(123)).toEqual(6);
-});
+describe("자릿수의 합", () => {
+  test(`getSum`, () => {
+    expect(getSum(123)).toEqual(6);
+  });
 
-test(`자릿수의 합`, () => {
-  expect(solution([128, 460, 603, 40, 521, 137, 123])).toEqual(137);
+  test(`solution`, () => {
+    expect(solution([128, 460, 603, 40, 521, 137, 123])).toEqual(137);
+  });
 });
