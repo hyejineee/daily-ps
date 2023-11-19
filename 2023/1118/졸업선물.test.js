@@ -1,5 +1,3 @@
-const { sort } = require("semver");
-
 const solution = (arr, budget) => {
   const c = arr.length;
   const prices = arr.map(([a, b]) => a + b);
