@@ -6,8 +6,7 @@ const solution = (n, k) => {
   let i = 0;
   while (q.length !== 1) {
     i++;
-    if (i % k === 0) q.shift();
-    else q.push(q.shift());
+    i % k === 0 ? q.shift() : q.push(q.shift());
   }
 
   return q[0];
