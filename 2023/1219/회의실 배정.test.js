@@ -1,34 +1,31 @@
+const { sort } = require("semver");
+
 const solution = (arr) => {
-  let fs = require("fs");
-  let input = fs.readFileSync("/dev/stdin").toString().split("\n");
+  // let fs = require("fs");
+  // let input = fs.readFileSync("/dev/stdin").toString().split("\n");
 
-  const n = input[0];
-  const arr = [];
+  // const n = input[0];
+  // const arr = [];
 
-  for (let i = 0; i < n; i++) {
-    arr.push(input[i].split(" "));
-  }
+  // for (let i = 0; i < n; i++) {
+  //   arr.push(input[i].split(" "));
+  // }
 
-  const sorted = [...arr].sort(([a], [b]) => a - b);
+  const sorted = [...arr].sort(([s1, e1], [s2, e2]) => {
+    if (e1 === e2) return s1 - s2;
+    return e1 - e2;
+  });
 
-  let maxCount = 0;
+  let count = 0;
+  let endTime = 0;
+
   for (let i = 0; i < arr.length; i++) {
-    const [s, e] = sorted[i];
-    let ps = s,
-      pe = e;
-    let count = 1;
-
-    for (let j = i + 1; j < arr.length; j++) {
-      const [cs, ce] = sorted[j];
-      if (cs >= pe) {
-        count++;
-        ps = cs;
-        pe = ce;
-      }
+    if (endTime <= sorted[i][0]) {
+      endTime = sorted[i][1];
+      count++;
     }
-    maxCount = Math.max(maxCount, count);
   }
-  return maxCount;
+  return count;
 };
 
 describe("회의실 배정", () => {
