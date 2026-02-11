@@ -1,6 +1,6 @@
-function decodeString(s: string): string {
-  const numStack: number[] = [];
-  const strStack: string[] = [];
+function decodeString(s) {
+  const numStack = [];
+  const strStack = [];
 
   let currentNum = "";
   let currentStr = "";
@@ -28,8 +28,9 @@ function decodeString(s: string): string {
 
     // 닫는 괄호
     if (cur === "]") {
-      const repeatTimes = numStack.pop()!;
-      const previousString = strStack.pop()!;
+      const repeatTimes = numStack.pop();
+      const previousString = strStack.pop();
+      // 반복이 어떤 식으로 진행되는지 파악하는 것이 핵심. 이전 상태와 다음 상태가 어떻게 결합되는지.
       currentStr = previousString + currentStr.repeat(repeatTimes);
     }
   }

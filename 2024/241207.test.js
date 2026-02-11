@@ -1,15 +1,15 @@
-function canCross(stones: number[]): boolean {
+function canCross(stones) {
   if (stones[1] !== 1) return false;
 
-  const map = new Map<number, Set<number>>();
+  const map = new Map();
   stones.forEach((stone) => {
     map.set(stone, new Set());
   });
 
-  map.get(0)?.add(1);
+  map.get(0).add(1);
 
   for (const stone of stones) {
-    const distances = map.get(stone)!;
+    const distances = map.get(stone);
 
     if (distances.size <= 0) continue;
 
@@ -17,13 +17,13 @@ function canCross(stones: number[]): boolean {
       const reachablePosition = stone + distance;
       if (!map.has(reachablePosition)) continue;
 
-      if (distance - 1 > 0) map.get(reachablePosition)?.add(distance - 1);
-      map.get(reachablePosition)?.add(distance);
-      map.get(reachablePosition)?.add(distance + 1);
+      if (distance - 1 > 0) map.get(reachablePosition).add(distance - 1);
+      map.get(reachablePosition).add(distance);
+      map.get(reachablePosition).add(distance + 1);
     }
   }
 
-  return map.get(stones[stones.length - 1])!.size > 0;
+  return map.get(stones[stones.length - 1]).size > 0;
 }
 
 test("solution", () => {
