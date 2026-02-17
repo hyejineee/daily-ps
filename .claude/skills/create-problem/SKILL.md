@@ -65,34 +65,43 @@ curl -s "https://solved.ac/api/v3/problem/show?problemId={문제번호}"
 
 **테스트 파일 생성 규칙:**
 
-1. **입력이 단일 숫자인 경우:**
+solution 함수는 파싱된 데이터를 받으므로, 테스트에서 입력을 파싱해서 전달합니다.
+
+1. **단일 테스트 케이스, 단일 값 입력:**
    ```javascript
    test("예제 1", () => {
-     expect(solution("2")).toBe(1);
+     expect(solution(2)).toBe(1);
    });
    ```
 
-2. **입력이 여러 줄인 경우:**
+2. **단일 테스트 케이스, 여러 값 입력:**
    ```javascript
    test("예제 1", () => {
-     const input = `7 7
-2 0 0 0 1 1 0
-0 0 1 0 1 2 0`;
-     expect(solution(input)).toBe(27);
+     expect(solution(7, 7, [[2,0,0,0,1,1,0], [0,0,1,0,1,2,0]])).toBe(27);
    });
    ```
 
-3. **출력이 여러 줄인 경우:**
+3. **여러 테스트 케이스를 배열로 처리:**
    ```javascript
    test("예제 1", () => {
-     const input = "4 2";
+     const testCases = [0, 1, 3];
+     const expected = `1 0
+0 1
+1 2`;
+     expect(solution(testCases)).toEqual(expected);
+   });
+   ```
+
+4. **출력이 여러 줄인 경우:**
+   ```javascript
+   test("예제 1", () => {
      const expected = `1 2
 1 3
 1 4
 2 3
 2 4
 3 4`;
-     expect(solution(input)).toEqual(expected);
+     expect(solution(4, 2)).toEqual(expected);
    });
    ```
 
@@ -100,22 +109,33 @@ curl -s "https://solved.ac/api/v3/problem/show?problemId={문제번호}"
 
 사용자에게 solution 함수를 어떻게 작성해야 하는지 안내합니다:
 
-**기본 형식:**
+**중요: solution 함수는 파싱된 데이터를 직접 받습니다. 입력 파싱은 테스트 파일과 백준 제출용 코드에서 처리합니다.**
+
+**패턴 1: 단일 테스트 케이스**
 ```javascript
-const solution = (input) => {
-  // 입력 파싱
-  const n = Number(input);  // 단일 숫자
-  // const [n, m] = input.split(' ').map(Number);  // 한 줄, 여러 값
-  // const lines = input.split('\n');  // 여러 줄
-
+const solution = (n, m) => {
+  // n, m을 직접 사용
   // 솔루션 코드
-
   return result;
 };
 ```
 
+**패턴 2: 여러 테스트 케이스를 배열로 처리**
+```javascript
+const solution = (testCases) => {
+  const results = [];
+
+  for (const n of testCases) {
+    // 각 테스트 케이스 처리
+    results.push(result);
+  }
+
+  return results.join('\n');
+};
+```
+
 **백준 제출 시:**
-주석 처리된 백준 제출용 코드의 주석을 해제하고 제출합니다.
+주석 처리된 백준 제출용 코드의 주석을 해제합니다. 이 코드가 입력을 파싱해서 solution에 전달합니다.
 
 ### 5단계: 완료 안내
 
@@ -140,19 +160,17 @@ const solution = (input) => {
 
 ## 생성되는 파일 예시
 
-### {문제}.js
+### 예시 1: 단일 테스트 케이스 (1로 만들기)
 
+**1로 만들기.js**
 ```javascript
 // https://www.acmicpc.net/problem/1463
 // 난이도: Silver 3
 // 태그: 다이나믹 프로그래밍
-// 문제 설명 요약
 
-const solution = (input) => {
-  // 입력 처리
-  const n = Number(input);
-
-  // 여기에 솔루션 코드를 작성하세요
+const solution = (n) => {
+  // n을 직접 사용
+  // 솔루션 코드 작성
 
   return result;
 };
@@ -160,23 +178,67 @@ const solution = (input) => {
 // 백준 제출용 코드
 // const fs = require('fs');
 // const input = fs.readFileSync('/dev/stdin').toString().trim();
-// const result = solution(input);
+// const n = Number(input);
+// const result = solution(n);
 // console.log(result);
 
 module.exports = { solution };
 ```
 
-### {문제}.test.js
-
+**1로 만들기.test.js**
 ```javascript
 const { solution } = require("./1로 만들기");
 
 test("예제 1", () => {
-  expect(solution("2")).toBe(1);
+  expect(solution(2)).toBe(1);
 });
 
 test("예제 2", () => {
-  expect(solution("10")).toBe(3);
+  expect(solution(10)).toBe(3);
+});
+```
+
+### 예시 2: 여러 테스트 케이스 (피보나치함수)
+
+**피보나치함수.js**
+```javascript
+// https://www.acmicpc.net/problem/1003
+// 난이도: Bronze 3
+// 태그: 다이나믹 프로그래밍
+
+const solution = (testCases) => {
+  const results = [];
+
+  for (const n of testCases) {
+    // 각 테스트 케이스 처리
+    results.push(`${count0} ${count1}`);
+  }
+
+  return results.join('\n');
+};
+
+// 백준 제출용 코드
+// const fs = require('fs');
+// const input = fs.readFileSync('/dev/stdin').toString().trim();
+// const lines = input.split('\n');
+// const t = Number(lines[0]);
+// const testCases = lines.slice(1, t + 1).map(Number);
+// const result = solution(testCases);
+// console.log(result);
+
+module.exports = { solution };
+```
+
+**피보나치함수.test.js**
+```javascript
+const { solution } = require("./피보나치함수");
+
+test("예제 1", () => {
+  const testCases = [0, 1, 3];
+  const expected = `1 0
+0 1
+1 2`;
+  expect(solution(testCases)).toEqual(expected);
 });
 ```
 
@@ -204,8 +266,10 @@ daily-ps/
 
 1. **백준 제출용 코드는 항상 주석 처리됩니다** - 테스트 시에는 주석 처리 상태로, 제출 시에만 주석을 해제합니다.
 
-2. **solution 함수는 input 문자열을 받습니다** - 테스트와 실제 제출 모두 동일한 형식으로 작동합니다.
+2. **solution 함수는 파싱된 데이터를 받습니다** - input 문자열이 아닌, 파싱된 숫자/배열 등을 직접 받습니다. 입력 파싱은 테스트 파일과 백준 제출용 코드에서 처리합니다.
 
 3. **예제는 사용자가 제공합니다** - 백준이 크롤링을 막고 있어서 자동 추출이 불가능합니다.
 
 4. **solved.ac API는 문제 메타데이터만 제공합니다** - 난이도와 태그는 자동으로 추가되지만, 예제는 수동으로 추가해야 합니다.
+
+5. **입력 파싱 로직은 백준 제출용 코드에 작성합니다** - solution 함수는 비즈니스 로직만 담당하고, 입출력 처리는 분리합니다.
